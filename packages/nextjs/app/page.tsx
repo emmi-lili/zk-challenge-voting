@@ -27,15 +27,15 @@ const Home: NextPage = () => {
           <div className="flex items-center flex-col flex-grow mt-4">
             <div className="px-5 w-[90%]">
               <h1 className="text-center mb-6">
-                <span className="block text-4xl font-bold">🚩 Challenge: ZK Voting</span>
+                <span className="block text-4xl font-bold">ZK Voting by Emmi</span>
               </h1>
               <div className="flex flex-col items-center justify-center">
                 <Image
-                  src="/readme-zk.png"
-                  width="727"
-                  height="231"
-                  alt="ZK Voting challenge banner"
-                  className="rounded-xl border-4 border-primary"
+                  src="/emmi-zk-voting.png"
+                  width="500"
+                  height="400"
+                  alt="ZK Voting by Emmi"
+                  className="rounded-xl"
                 />
                 <div className="max-w-3xl">
                   <p className="text-center text-lg mt-8">
