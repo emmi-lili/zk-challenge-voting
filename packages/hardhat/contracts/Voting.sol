@@ -29,7 +29,9 @@ contract Voting is Ownable {
     uint256 private s_yesVotes;
     uint256 private s_noVotes;
 
-    /// Checkpoint 2 //////
+    LeanIMTData private s_tree;
+    mapping(address => bool) private s_hasRegistered;
+    mapping(uint256 => bool) private s_commitments;
 
     /// Checkpoint 6 //////
 
@@ -84,7 +86,30 @@ contract Voting is Ownable {
      * @param _commitment The Poseidon-based commitment to insert into the IMT
      */
     function register(uint256 _commitment) public {
-        /// Checkpoint 2 //////
+        // Step 1: Check if caller is on the allowlist
+        if (!s_voters[msg.sender]) {
+            revert Voting__NotAllowedToVote();
+        }
+
+        // Step 2: Check if caller has already registered
+        if (s_hasRegistered[msg.sender]) {
+            revert Voting__NotAllowedToVote();
+        }
+
+        // Step 3: Check if commitment is unique (not already in tree)
+        if (s_commitments[_commitment]) {
+            revert Voting__CommitmentAlreadyAdded(_commitment);
+        }
+
+        // Step 4: Mark address as registered and commitment as used
+        s_hasRegistered[msg.sender] = true;
+        s_commitments[_commitment] = true;
+
+        // Step 5: Insert commitment into the Merkle tree
+        s_tree.insert(_commitment);
+
+        // Step 6: Emit event for off-chain tracking (index is size - 1 after insertion)
+        emit NewLeaf(s_tree.size - 1, _commitment);
     }
 
     /**
@@ -123,15 +148,13 @@ contract Voting is Ownable {
         contractOwner = owner();
         yesVotes = s_yesVotes;
         noVotes = s_noVotes;
-        /// Checkpoint 2 //////
-        // size = s_tree.size;
-        // depth = s_tree.depth;
-        // root = s_tree.root();
+        size = s_tree.size;
+        depth = s_tree.depth;
+        root = s_tree.size > 0 ? s_tree.root() : 0;
     }
 
     function getVoterData(address _voter) public view returns (bool voter, bool registered) {
         voter = s_voters[_voter];
-        // /// Checkpoint 2 //////
-        // registered = s_hasRegistered[_voter];
+        registered = s_hasRegistered[_voter];
     }
 }
