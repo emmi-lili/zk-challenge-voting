@@ -36,6 +36,17 @@
  },
  "data": {
   "methods": {
+   "HonkVerifier_ea50d0e4": {
+    "key": "ea50d0e4",
+    "isCall": true,
+    "contract": "HonkVerifier",
+    "method": "verify",
+    "fnSig": "verify(bytes,bytes32[])",
+    "intrinsicGas": [],
+    "callData": [],
+    "gasData": [],
+    "numberOfCalls": 0
+   },
    "Voting_ff29897d": {
     "key": "ff29897d",
     "isCall": false,
@@ -44,7 +55,9 @@
     "fnSig": "addVoters(address[],bool[])",
     "intrinsicGas": [
      22132,
-     22628,
+     22132,
+     22132,
+     22120,
      22132,
      22132,
      22132
@@ -54,20 +67,24 @@
      0,
      0,
      0,
+     0,
+     0,
      0
     ],
     "gasData": [
-     49095,
-     49095,
-     49095,
-     49095,
-     73582
+     49134,
+     49146,
+     49146,
+     49146,
+     49146,
+     49146,
+     49146
     ],
-    "numberOfCalls": 5,
-    "executionGasAverage": 53992,
+    "numberOfCalls": 7,
+    "executionGasAverage": 49144,
     "calldataGasAverage": 0,
-    "min": 49095,
-    "max": 73582
+    "min": 49134,
+    "max": 49146
    },
    "Voting_8fb4cd80": {
     "key": "8fb4cd80",
@@ -86,6 +103,17 @@
     "contract": "Voting",
     "method": "getVotingData",
     "fnSig": "getVotingData()",
+    "intrinsicGas": [],
+    "callData": [],
+    "gasData": [],
+    "numberOfCalls": 0
+   },
+   "Voting_db9753a0": {
+    "key": "db9753a0",
+    "isCall": true,
+    "contract": "Voting",
+    "method": "i_verifier",
+    "fnSig": "i_verifier()",
     "intrinsicGas": [],
     "callData": [],
     "gasData": [],
@@ -111,11 +139,11 @@
     "intrinsicGas": [
      21204,
      21204,
+     21204,
      21216,
-     21216,
-     21216,
-     21216,
-     21216
+     21204,
+     21204,
+     21204
     ],
     "callData": [
      0,
@@ -127,19 +155,19 @@
      0
     ],
     "gasData": [
-     142404,
-     142404,
-     142416,
-     142416,
-     142416,
-     142416,
-     142416
+     142426,
+     142426,
+     142426,
+     142426,
+     142426,
+     142426,
+     181599
     ],
     "numberOfCalls": 7,
-    "executionGasAverage": 142413,
+    "executionGasAverage": 148022,
     "calldataGasAverage": 0,
-    "min": 142404,
-    "max": 142416
+    "min": 142426,
+    "max": 181599
    },
    "Voting_715018a6": {
     "key": "715018a6",
@@ -169,10 +197,35 @@
     "contract": "Voting",
     "method": "vote",
     "fnSig": "vote(bytes,bytes32,bytes32,bytes32,bytes32)",
-    "intrinsicGas": [],
-    "callData": [],
-    "gasData": [],
-    "numberOfCalls": 0
+    "intrinsicGas": [
+     246572,
+     246572,
+     247256,
+     247244,
+     246896,
+     246896
+    ],
+    "callData": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "gasData": [
+     360104,
+     360104,
+     360428,
+     360428,
+     360766,
+     360788
+    ],
+    "numberOfCalls": 6,
+    "executionGasAverage": 360436,
+    "calldataGasAverage": 0,
+    "min": 360104,
+    "max": 360788
    },
    "VerifierMock_69d4becc": {
     "key": "69d4becc",
@@ -246,10 +299,35 @@
     "contract": "VerifierMock",
     "method": "setExpectedInputs",
     "fnSig": "setExpectedInputs(bytes32,bytes32,bytes32,bytes32)",
-    "intrinsicGas": [],
-    "callData": [],
-    "gasData": [],
-    "numberOfCalls": 0
+    "intrinsicGas": [
+     21600,
+     22356,
+     22344,
+     21984,
+     21972,
+     22356
+    ],
+    "callData": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "gasData": [
+     34534,
+     75590,
+     75962,
+     95874,
+     96246,
+     116146
+    ],
+    "numberOfCalls": 6,
+    "executionGasAverage": 82392,
+    "calldataGasAverage": 0,
+    "min": 34534,
+    "max": 116146
    },
    "VerifierMock_0c54fb06": {
     "key": "0c54fb06",
@@ -257,10 +335,32 @@
     "contract": "VerifierMock",
     "method": "setShouldVerify",
     "fnSig": "setShouldVerify(bool)",
-    "intrinsicGas": [],
-    "callData": [],
-    "gasData": [],
-    "numberOfCalls": 0
+    "intrinsicGas": [
+     21204,
+     21192,
+     21204,
+     21204,
+     21204
+    ],
+    "callData": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "gasData": [
+     21719,
+     23731,
+     23731,
+     23731,
+     23731
+    ],
+    "numberOfCalls": 5,
+    "executionGasAverage": 23329,
+    "calldataGasAverage": 0,
+    "min": 21719,
+    "max": 23731
    },
    "VerifierMock_0a79726a": {
     "key": "0a79726a",
@@ -298,7 +398,37 @@
   },
   "deployments": [
    {
+    "name": "BaseHonkVerifier",
+    "gasData": [],
+    "callData": []
+   },
+   {
+    "name": "CommitmentSchemeLib",
+    "gasData": [],
+    "callData": []
+   },
+   {
     "name": "Context",
+    "gasData": [],
+    "callData": []
+   },
+   {
+    "name": "FrLib",
+    "gasData": [],
+    "callData": []
+   },
+   {
+    "name": "Honk",
+    "gasData": [],
+    "callData": []
+   },
+   {
+    "name": "HonkVerificationKey",
+    "gasData": [],
+    "callData": []
+   },
+   {
+    "name": "HonkVerifier",
     "gasData": [],
     "callData": []
    },
@@ -315,8 +445,10 @@
    {
     "name": "LeanIMT",
     "gasData": [
-     1028149,
-     1028149,
+     1028221,
+     1028221,
+     1028221,
+     1028221,
      1028221,
      1028221,
      1028221,
@@ -336,11 +468,13 @@
      0,
      0,
      0,
+     0,
+     0,
      0
     ],
-    "executionGasAverage": 1028207,
+    "executionGasAverage": 1028221,
     "calldataGasAverage": 0,
-    "min": 1028149,
+    "min": 1028221,
     "max": 1028221,
     "percent": 3.4
    },
@@ -352,6 +486,8 @@
    {
     "name": "PoseidonT3",
     "gasData": [
+     3695091,
+     3695091,
      3695091,
      3695091,
      3695091,
@@ -373,6 +509,8 @@
      0,
      0,
      0,
+     0,
+     0,
      0
     ],
     "executionGasAverage": 3695091,
@@ -382,23 +520,30 @@
     "percent": 12.3
    },
    {
-    "name": "VerifierMock",
+    "name": "RelationsLib",
     "gasData": [],
     "callData": []
    },
    {
-    "name": "Voting",
+    "name": "TranscriptLib",
+    "gasData": [],
+    "callData": []
+   },
+   {
+    "name": "VerifierMock",
     "gasData": [
-     657225,
-     657225,
-     657249,
-     657249,
-     657249,
-     657249,
-     657249,
-     657249,
-     657249,
-     657249
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711,
+     290711
     ],
     "callData": [
      0,
@@ -410,13 +555,51 @@
      0,
      0,
      0,
+     0,
+     0,
      0
     ],
-    "executionGasAverage": 657244,
+    "executionGasAverage": 290711,
     "calldataGasAverage": 0,
-    "min": 657225,
-    "max": 657249,
-    "percent": 2.2
+    "min": 290711,
+    "max": 290711,
+    "percent": 1
+   },
+   {
+    "name": "Voting",
+    "gasData": [
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885,
+     866885
+    ],
+    "callData": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "executionGasAverage": 866885,
+    "calldataGasAverage": 0,
+    "min": 866885,
+    "max": 866885,
+    "percent": 2.9
    }
   ]
  }

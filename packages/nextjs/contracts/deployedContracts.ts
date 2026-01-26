@@ -6,8 +6,59 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
+    HonkVerifier: {
+      address: "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      abi: [
+        {
+          inputs: [],
+          name: "ProofLengthWrong",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PublicInputsLengthWrong",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "ShpleminiFailed",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "SumcheckFailed",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes",
+              name: "proof",
+              type: "bytes",
+            },
+            {
+              internalType: "bytes32[]",
+              name: "publicInputs",
+              type: "bytes32[]",
+            },
+          ],
+          name: "verify",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+      deployedOnBlock: 70,
+    },
     LeanIMT: {
-      address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      address: "0x1291Be112d480055DaFd8a610b7d1e203891C274",
       abi: [
         {
           inputs: [],
@@ -36,10 +87,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 9,
+      deployedOnBlock: 74,
     },
     PoseidonT3: {
-      address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      address: "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
       abi: [
         {
           inputs: [
@@ -62,10 +113,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 7,
+      deployedOnBlock: 72,
     },
     Voting: {
-      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      address: "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
       abi: [
         {
           inputs: [
@@ -333,6 +384,19 @@ const deployedContracts = {
         },
         {
           inputs: [],
+          name: "i_verifier",
+          outputs: [
+            {
+              internalType: "contract IVerifier",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
           name: "owner",
           outputs: [
             {
@@ -416,7 +480,7 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 11,
+      deployedOnBlock: 76,
     },
   },
 } as const;

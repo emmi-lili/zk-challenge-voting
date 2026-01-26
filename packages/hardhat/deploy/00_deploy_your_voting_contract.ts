@@ -24,12 +24,11 @@ const deployYourVotingContract: DeployFunction = async function (hre: HardhatRun
   const ownerAddress = deployer; // Use deployer as owner
 
   /// checkpoint 6 //////
-  const verifierAddress = "0x0000000000000000000000000000000000000002"; // placeholder
-  // const verifier = await deploy("HonkVerifier", {
-  //   from: deployer,
-  //   log: true,
-  //   autoMine: true,
-  // });
+  const verifier = await deploy("HonkVerifier", {
+    from: deployer,
+    log: true,
+    autoMine: true,
+  });
 
   /// checkpoint 2 //////
   const poseidon3 = await deploy("PoseidonT3", {
@@ -51,7 +50,7 @@ const deployYourVotingContract: DeployFunction = async function (hre: HardhatRun
     from: deployer,
     // Contract constructor arguments
     /// checkpoint 6 //////
-    args: [ownerAddress, verifierAddress, "Should Emmi build more zk apps?"],
+    args: [ownerAddress, verifier.address, "Should Emmi build more zk apps?"],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
