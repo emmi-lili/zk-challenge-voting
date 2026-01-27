@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 //// Checkpoint 8 //////
-// import { UltraHonkBackend } from "@aztec/bb.js";
-// // @ts-ignore
-// import { Noir } from "@noir-lang/noir_js";
-// import { LeanIMT } from "@zk-kit/lean-imt";
-// import { encodeAbiParameters, toHex } from "viem";
-// import { poseidon1, poseidon2 } from "poseidon-lite";
+import { UltraHonkBackend } from "@aztec/bb.js";
+// @ts-ignore
+import { Noir } from "@noir-lang/noir_js";
+import { LeanIMT } from "@zk-kit/lean-imt";
+import { poseidon1, poseidon2 } from "poseidon-lite";
+import { encodeAbiParameters, toHex } from "viem";
 import { useAccount } from "wagmi";
 import { useDeployedContractInfo, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { useChallengeState } from "~~/services/store/challengeStore";
@@ -26,11 +26,78 @@ const generateProof = async (
 ) => {
   //// Checkpoint 8 //////
   try {
-    void [_root, _vote, _depth, _nullifier, _secret, _index, _leaves, _circuitData];
-    return {
-      proof: new Uint8Array([0]),
-      publicInputs: [0n],
+    // Step 1: Compute nullifierHash from the private nullifier
+    const nullifierHash = poseidon1([BigInt(_nullifier)]);
+
+    // Step 2: Rebuild the Merkle tree
+    // Initialize a new LeanIMT with Poseidon2 as the hash function
+    const calculatedTree = new LeanIMT((a: bigint, b: bigint) => poseidon2([a, b]));
+
+    // Extract commitment values from events
+    const leaves = _leaves.map(event => {
+      return event?.args.value;
+    });
+
+    // Reverse order: events are newest-last, but tree needs oldest-first
+    const leavesReversed = leaves.reverse();
+
+    // Insert all leaves into the tree
+    calculatedTree.insertMany(leavesReversed as bigint[]);
+
+    // Step 3: Generate Merkle inclusion proof
+    const calculatedProof = calculatedTree.generateProof(_index);
+
+    // Convert siblings to strings
+    const sibs = calculatedProof.siblings.map(sib => {
+      return sib.toString();
+    });
+
+    // Pad siblings array to length 16 (circuit expects fixed size)
+    const lengthDiff = 16 - sibs.length;
+    for (let i = 0; i < lengthDiff; i++) {
+      sibs.push("0");
+    }
+
+    // Step 4: Prepare circuit inputs (same order as in main.nr!)
+    const input = {
+      nullifier_hash: nullifierHash.toString(),
+      nullifier: BigInt(_nullifier).toString(),
+      secret: BigInt(_secret).toString(),
+      root: _root.toString(),
+      vote: _vote,
+      depth: _depth.toString(),
+      index: _index.toString(),
+      siblings: sibs,
     };
+
+    // Step 5: Create the witness using Noir
+    const noir = new Noir(_circuitData);
+    const { witness } = await noir.execute(input);
+    console.log("witness", witness);
+
+    // Step 6: Generate the ZK proof using UltraHonk
+    const honk = new UltraHonkBackend(_circuitData.bytecode, { threads: 1 });
+
+    // Silence logs during proof generation
+    const originalLog = console.log;
+    console.log = () => {};
+    const { proof, publicInputs } = await honk.generateProof(witness, {
+      keccak: true,
+    });
+    console.log = originalLog;
+
+    console.log("proof", proof);
+
+    // Step 7: Format result for Solidity
+    const proofHex = toHex(proof);
+    const inputsHex = publicInputs.map(x =>
+      typeof x === "string" ? (x as `0x${string}`) : toHex(x as Uint8Array, { size: 32 }),
+    );
+
+    const result = encodeAbiParameters([{ type: "bytes" }, { type: "bytes32[]" }], [proofHex, inputsHex]);
+    console.log("result", result);
+
+    return { proof, publicInputs };
   } catch (error) {
     console.log(error);
     throw error;

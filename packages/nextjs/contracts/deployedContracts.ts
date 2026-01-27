@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     HonkVerifier: {
-      address: "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      address: "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
       abi: [
         {
           inputs: [],
@@ -55,10 +55,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 70,
+      deployedOnBlock: 78,
     },
     LeanIMT: {
-      address: "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+      address: "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
       abi: [
         {
           inputs: [],
@@ -87,10 +87,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 74,
+      deployedOnBlock: 82,
     },
     PoseidonT3: {
-      address: "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
+      address: "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
       abi: [
         {
           inputs: [
@@ -113,10 +113,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 72,
+      deployedOnBlock: 80,
     },
     Voting: {
-      address: "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
+      address: "0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3",
       abi: [
         {
           inputs: [
@@ -480,7 +480,7 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 76,
+      deployedOnBlock: 84,
     },
   },
 } as const;
